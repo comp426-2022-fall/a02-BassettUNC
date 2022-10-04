@@ -19,5 +19,10 @@
   "bugs": {
     "url": "https://github.com/comp426-2022-fall/a02-BassettUNC/issues"
   },
-  "homepage": "https://github.com/comp426-2022-fall/a02-BassettUNC#readme"
+  "homepage": "https://github.com/comp426-2022-fall/a02-BassettUNC#readme",
+  "dependencies": {
+    "minimist": "^1.2.6",
+    "moment-timezone": "^0.5.37",
+    "node-fetch": "^3.2.10"
+  }
 }
