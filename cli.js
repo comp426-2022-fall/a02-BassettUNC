@@ -15,3 +15,15 @@ if(args[0] == '-h'){
 	console.log("-j            Echo pretty JSON from open-meteo API and exit.")
 	process.exit(0)
 }
+
+//Extract system timezone
+const timezone = moment.tz.guest();
+
+//Define Required Vars
+
+const lat = "35.875";
+const lon = "-79.0";
+
+//Define fetch Url
+const url = "https://api.open-meteo.com/v1/forecast?" + "latitude=" + latitude + "&longitude=" + longitude + "&daily=precipitation_sum,precipitation_hours" +timezone
+
