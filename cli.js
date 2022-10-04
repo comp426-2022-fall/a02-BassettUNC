@@ -27,3 +27,33 @@ const lon = "-79.0";
 //Define fetch Url
 const url = "https://api.open-meteo.com/v1/forecast?" + "latitude=" + latitude + "&longitude=" + longitude + "&daily=precipitation_sum,precipitation_hours" +timezone
 
+// Make a request
+const response = await fetch(url);
+
+// Get the data from the request
+const data = await response.json();
+
+//Define days from minimist args
+const days = args.d
+
+if (days == 0) {
+	if (data.daily.precipitation_hours[days] == 0) {
+		console.log("You will not need your galoshes today.");
+	} else {
+		console.log("You might need your galoshes today.");
+	}
+} else if (days > 1) {
+	if (data.daily.precipitation_hours[days] == 0) {
+		console.log("You will not need your galoshes");
+	} else {
+		console.log("You might need your galoshes");
+	}
+	console.log(" in" + days + " days");
+} else {
+	if (data.daily.precipitation_hours[days] == 0) {
+		console.log("You will not need your galoshes tomorrow.");
+	} else {
+		console.log("You might need your galoshes tomorrow.");
+	}	
+}
+
