@@ -23,16 +23,16 @@ const timezone = moment.tz.guest();
 	timezone = args.z;
 
 //Set latitude and longitudes
-if (args.n != null) {
+if (args.n) {
 	lat = args.n;
-} else if (args.s != null) {
-	lat = args.s / -1
+} else if (args.s) {
+	lat = args.s / -1;
 }
 
-if (args.w != null) {
+if (args.w) {
         lon = args.w;
-} else if (args.e != null) {
-        lon = args.e / -1
+} else if (args.e) {
+        lon = args.e / -1;
 }
 
 //Define fetch Url
@@ -45,12 +45,20 @@ const response = await fetch(url);
 const data = await response.json();
 
 //Output json if arg exists
-if (args.j != null) {
+if (args.j) {
 	cosole.log(data);
 } 
 
 //Define days from minimist args
-const days = args.d
+if (args.d){
+  if (args.d > 6 || args.d < 0){
+    days = 0
+  }
+  else{
+    days = args.d
+  }
+}
+
 
 if (days == 0) {
 	if (data.daily.precipitation_hours[days] == 0) {
@@ -72,4 +80,4 @@ if (days == 0) {
 		console.log("You might need your galoshes tomorrow.");
 	}	
 }
-
+process.exit(0);
