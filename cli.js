@@ -51,11 +51,12 @@ const data = await response.json();
 
 //Output json if arg exists
 if (args.j) {
-	cosole.log(data);
+	console.log(data);
+	process.exit(0);
 } 
 
 //Define days from minimist args
-let days = 0;
+let days = 1;
 if (args.d){
   if (args.d > 6 || args.d < 0){
     days = 0;
