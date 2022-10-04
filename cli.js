@@ -16,13 +16,24 @@ if(args[0] == '-h'){
 	process.exit(0)
 }
 
-//Extract system timezone
+//Set timezone
+if (args.z == null) {
 const timezone = moment.tz.guest();
+} else {
+	timezone = args.z;
 
-//Define Required Vars
+//Set latitude and longitudes
+if (args.n != null) {
+	lat = args.n;
+} else if (args.s != null) {
+	lat = args.s / -1
+}
 
-const lat = "35.875";
-const lon = "-79.0";
+if (args.w != null) {
+        lon = args.w;
+} else if (args.e != null) {
+        lon = args.e / -1
+}
 
 //Define fetch Url
 const url = "https://api.open-meteo.com/v1/forecast?" + "latitude=" + latitude + "&longitude=" + longitude + "&daily=precipitation_sum,precipitation_hours" +timezone
@@ -32,6 +43,11 @@ const response = await fetch(url);
 
 // Get the data from the request
 const data = await response.json();
+
+//Output json if arg exists
+if (args.j != null) {
+	cosole.log(data);
+} 
 
 //Define days from minimist args
 const days = args.d
