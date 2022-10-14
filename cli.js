@@ -6,9 +6,9 @@ import minimist from 'minimist';
 
 //Select args for help
 const args = minimist(process.argv.slice(2));
-if(args[0] == '-h'){
+if(args.h){
     console.log('Usage: galosh.js [options] -[n|s] LATITUDE -[e|w] LONGITUDE -t TIME_ZONE\n    -h            Show this help message and exit.\n    -n, -s        Latitude: N positive; S negative.\n    -e, -w        Longitude: E positive; W negative.\n    -t            Time zone: uses tz.guess() from moment-timezone by default.\n    -d 0-6        Day to retrieve weather: 0 is today; defaults to 1.\n    -j            Echo pretty JSON from open-meteo API and exit.');
-	process.ext(0);
+	process.exit(0);
 
 }
 
@@ -19,7 +19,31 @@ if (!args.z) {
 } else {
          timezone = args.z;
 }
+if(args.n || args.e) {
+  if (args.n < 0 ) { 
+    console.log("Latitude must be in range")
+    process.exit(0)
+  }
 
+  if(args.e < 0) {
+    console.log("Longitude must be in range")
+    process.exit(0)
+  }
+
+}
+
+if(args.s || args.w) {
+  if (args.s > 0) { 
+    console.log("Latitude must be in range")
+    process.exit(0)
+  }
+
+  if(args.w > 0) {
+    console.log("Longitude must be in range")
+    process.exit(0)
+  }
+  
+}
 //Set latitude and longitudes
 let lat = 0;
 if (args.n) {
@@ -52,7 +76,7 @@ if (args.j) {
 
 //Define days from minimist args
 let days = 1;
-if (args.d){
+if (args.d != null){
   if (args.d > 6 || args.d < 0){
     days = 0;
   }
