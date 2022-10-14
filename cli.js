@@ -19,37 +19,15 @@ if (!args.z) {
 } else {
          timezone = args.z;
 }
-if(args.n || args.e) {
-  if (args.n < 0 ) { 
-    console.log("Latitude must be in range")
-    process.exit(0)
-  }
 
-  if(args.e < 0) {
-    console.log("Longitude must be in range")
-    process.exit(0)
-  }
-
-}
-
-if(args.s || args.w) {
-  if (args.s > 0) { 
-    console.log("Latitude must be in range")
-    process.exit(0)
-  }
-
-  if(args.w > 0) {
-    console.log("Longitude must be in range")
-    process.exit(0)
-  }
-  
-}
 //Set latitude and longitudes
 let lat = 0;
 if (args.n) {
 	lat = args.n;
 } else if (args.s) {
 	lat = args.s / -1;
+} else {
+  console.log("Latitude must be in range");
 }
 
 let lon = 0;
@@ -57,6 +35,8 @@ if (args.w) {
         lon = args.w;
 } else if (args.e) {
         lon = args.e / -1;
+} else {
+  console.log("Longitude must be in range");
 }
 
 //Define fetch Url
